@@ -9,19 +9,22 @@ class ProductPage(BasePage):
             "Not found button add to cat"
     # Проверка наличия информации о товаре
     def should_be_product_info(self):
-        assert self.is_element_present(*ProductPageLocators.PRODUCT_DESCRIPTION), \
+        assert self.is_element_present(*ProductPageLocators.DESCRIPTION), \
             "Not found product info"
     # Добавить в корзину
     def add_product_to_cart(self):
         self.browser.find_element(*ProductPageLocators.CART).click()
-        # self.solve_quiz_and_get_code()
-        self.check_added_product_name_with_alert()
-    # Проверка имени в alert добавленного продукта с именем из описания продукта
+    # Сравнение имени в alert с именем из описания продукта
     def check_added_product_name_with_alert(self):
-        name_added_product = self.browser.find_element(*ProductPageLocators.NAME_PRODUCT_ADDET_TO_CART).text
-        prod_name = self.get_product_name()
-        assert prod_name == name_added_product, \
-            f"Name product added to cart not correct, correct name {prod_name}, name added {name_added_product}"
+        name_in_alert = self.browser.find_element(*ProductPageLocators.NAME_IN_ALERT).text
+        name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
+        assert name == name_in_alert, \
+            f"Name product added to cart not correct, correct name {name}, name added {name_in_alert}"
+    # Сравнение цены в описании товара с alert
+    def check_price_pr_info_with_alert(self):
+        price = self.browser.find_element(*ProductPageLocators.PRICE).text
+        price_alert = self.browser.find_element(*ProductPageLocators.PRICE).text
+        assert price == price_alert, \
+            f"Different price in info {price} and alert {price_alert}"
 
-    def get_product_name(self):
-        return self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
+
