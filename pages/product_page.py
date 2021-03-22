@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 class ProductPage(BasePage):
     # Провека наличия кнопки "Добавить в корзину"
     def should_be_link_add_to_cart(self):
-        assert self.is_element_present(*ProductPageLocators.CART), \
+        assert self.is_element_present(*ProductPageLocators.ADD_TO_BASKET), \
             "Not found button add to cat"
     # Проверка наличия информации о товаре
     def should_be_product_info(self):
@@ -13,7 +13,7 @@ class ProductPage(BasePage):
             "Not found product info"
     # Добавить в корзину
     def add_product_to_cart(self):
-        self.browser.find_element(*ProductPageLocators.CART).click()
+        self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET).click()
     # Сравнение имени в alert с именем из описания продукта
     def check_added_product_name_with_alert(self):
         name_in_alert = self.browser.find_element(*ProductPageLocators.NAME_IN_ALERT).text
