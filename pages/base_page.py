@@ -54,7 +54,7 @@ class BasePage():
     def find(self,something):
         self.browser.find_element(*BasePageLocators.FIND_TEXT).send_keys(f"{something}")
         self.browser.find_element(*BasePageLocators.BTN_FIND).click()
-        self.is_element_present(*BasePageLocators.OSCAR)
+        return self.is_element_present(*BasePageLocators.OSCAR)
 
     def open_basket(self):
         self.browser.find_element(*BasePageLocators.BTN_VIEW_BASKET).click()
