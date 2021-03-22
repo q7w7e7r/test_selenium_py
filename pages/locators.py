@@ -28,3 +28,8 @@ class BasePageLocators():
     BTN_FIND = (By.CSS_SELECTOR, 'input[ value="Search"]')
     FIND_TEXT = (By.CSS_SELECTOR, '#id_q')
     OSCAR = (By.CSS_SELECTOR, "[title = 'Oscar T-shirt']")
+    BTN_VIEW_BASKET = (By.CSS_SELECTOR,".basket-mini a.btn")
+
+class BasketPageLocators():
+    TITLE =(By.CSS_SELECTOR, '#content_inner > .basket-title')
+    EMPTY_MESSAGE =(By.CSS_SELECTOR, '#content_inner > p > a')
