@@ -22,3 +22,9 @@ class ProductPageLocators():
 class BasePageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+    LANGUAGE = (By.CSS_SELECTOR, "[name='language']")
+    LANGUAGE_DE = (By.CSS_SELECTOR, 'option[value="de"]')
+    CONFIRM_CHANGE_LANGUAGE = (By.CSS_SELECTOR, '#language_selector > button')
+    FIND_BUTTON = (By.CSS_SELECTOR, 'input[ value="Search"]')
+    FIND_TEXT = (By.CSS_SELECTOR, '#id_q')
+    OSCAR = (By.CSS_SELECTOR, "[title = 'Oscar T-shirt']")

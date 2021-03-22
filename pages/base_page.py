@@ -40,3 +40,18 @@ class BasePage():
 
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+
+    def change_language_on_de(self):
+        self.browser.find_element(*BasePageLocators.LANGUAGE_DE).click()
+        self.browser.find_element(*BasePageLocators.CONFIRM_CHANGE_LANGUAGE).click()
+
+    def check_current_language(self, lang):
+        if f"{lang}" in self.browser.find_element(*BasePageLocators.LANGUAGE_DE).text:
+            return True
+        else:
+            return False
+
+    def find(self,something):
+        self.browser.find_element(*BasePageLocators.FIND_TEXT).send_keys(f"{something}")
+        self.browser.find_element(*BasePageLocators.FIND_BUTTON).click()
+        self.is_element_present(*BasePageLocators.OSCAR)

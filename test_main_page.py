@@ -18,3 +18,17 @@ def test_guest_should_see_login_link(browser):
     page = MainPage(browser, link)
     page.open()
     page.should_be_login_link()
+
+def test_change_language_on_de(browser):
+    link = "http://selenium1py.pythonanywhere.com/"
+    page = MainPage(browser, link)
+    page.open()
+    page.change_language_on_de()
+    assert  page.check_current_language("Deutsch")
+
+def test_find_oscar(browser):
+    link = "http://selenium1py.pythonanywhere.com/"
+    page = MainPage(browser, link)
+    page.open()
+    assert page.find("Oscar T-shirt"), "Oscar T-shirt not found"
+
