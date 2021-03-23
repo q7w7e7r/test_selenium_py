@@ -16,9 +16,9 @@ class ProductPage(BasePage):
         self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET).click()
     # Сравнение имени в alert с именем из описания продукта
     def check_added_product_name_with_alert(self):
-        name_in_alert = self.browser.find_element(*ProductPageLocators.NAME_IN_ALERT).text
+        name_in_alert = self.browser.find_element(*ProductPageLocators.SUCCESS_MESSAGE).text
         name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
-        assert name == name_in_alert, \
+        assert name in name_in_alert, \
             f"Name product added to cart not correct, correct name {name}, name added {name_in_alert}"
     # Сравнение цены в описании товара с alert
     def check_price_pr_info_with_alert(self):
