@@ -20,7 +20,10 @@ class ProductPage(BasePage):
 
     # Сравнение имени в alert с именем из описания продукта
     def check_added_product_name_with_alert(self):
-        name_in_alert = self.browser.find_element(*ProductPageLocators.SUCCESS_MESSAGE).text
+        # При тестировании в FireFox не успевает отрисоваться алерт
+        # и переменная из алерта из-за этого заполнится пустотой если не вставить ожидание
+        self.is_element_present(*ProductPageLocators.PRODUCT_NAME_ALERT)
+        name_in_alert = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_ALERT).text
         name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
         assert name in name_in_alert, \
             f"Name product added to cart not correct, correct name {name}, name added {name_in_alert}"

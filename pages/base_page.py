@@ -82,5 +82,8 @@ class BasePage():
         self.browser.find_element(*BasePageLocators.BTN_VIEW_BASKET).click()
 
     def should_be_authorized_user(self):
+        # Баг - если запустить все тесты в каталоге то иконка на одном из тестов не успевает отрисоваться
+        # с помощью проверки баг был исправлен
+        self.is_element_present(*BasePageLocators.USER_ICON)
         assert self.is_element_present(*BasePageLocators.USER_ICON), \
             "User icon is not presented, probably unauthorised user"
