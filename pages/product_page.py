@@ -28,4 +28,7 @@ class ProductPage(BasePage):
         assert price == price_alert, \
             f"Different price in info {price} and alert {price_alert}"
 
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
 
