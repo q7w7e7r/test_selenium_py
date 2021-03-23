@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from .locators import BasePageLocators
-import math
+import math,time
 
 
 class BasePage():
@@ -17,11 +17,22 @@ class BasePage():
         self.browser.get(self.url)
 
     def is_element_present(self, how, what):
+        # Баг - елси запустить все тесты в каталоге то получаю ошибку:
+        # def should_be_authorized_user(self):
+        # > assert self.is_element_present(*BasePageLocators.USER_ICON), \
+        #     "User icon is not presented, probably unauthorised user"
+        # E
+        # AssertionError: User icon is not presented, probably unauthorised user
+        # Если запустить тесты класса TestUserAddToBasketFromProductPage отдельно то ошибки нету
+        # с помощью задержки на секунду баг был исправлен
+        time.sleep(1)
         try:
             self.browser.find_element(how, what)
         except NoSuchElementException:
             return False
         return True
+
+
 
     def is_not_element_present(self, how, what, timeout=4):
         try:
