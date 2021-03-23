@@ -1,10 +1,13 @@
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException
+import math
+import time
+
 from selenium.common.exceptions import NoAlertPresentException
+from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
 from .locators import BasePageLocators
-import math,time
 
 
 class BasePage():
@@ -31,8 +34,6 @@ class BasePage():
         except NoSuchElementException:
             return False
         return True
-
-
 
     def is_not_element_present(self, how, what, timeout=4):
         try:
@@ -72,7 +73,7 @@ class BasePage():
         else:
             return False
 
-    def find(self,something):
+    def find(self, something):
         self.browser.find_element(*BasePageLocators.FIND_TEXT).send_keys(f"{something}")
         self.browser.find_element(*BasePageLocators.BTN_FIND).click()
         return self.is_element_present(*BasePageLocators.OSCAR)

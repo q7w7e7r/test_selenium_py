@@ -1,7 +1,8 @@
 import pytest
-from .pages.main_page import MainPage
-from .pages.login_page import LoginPage
+
 from .pages.basket_page import BasketPage
+from .pages.login_page import LoginPage
+from .pages.main_page import MainPage
 
 
 @pytest.mark.login_guest
@@ -26,7 +27,7 @@ class TestLoginFromMainPage():
         page.should_be_login_link()
 
 
-def go_to_login_page( browser):
+def go_to_login_page(browser):
     login_link = browser.find_element_by_css_selector("#login_link")
     login_link.click()
 

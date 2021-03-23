@@ -1,7 +1,7 @@
 from .base_page import BasePage
-from .locators import ProductPageLocators
 from .locators import BasePageLocators
-from selenium.webdriver.common.by import By
+from .locators import ProductPageLocators
+
 
 class ProductPage(BasePage):
     # Провека наличия кнопки "Добавить в корзину"
@@ -13,15 +13,18 @@ class ProductPage(BasePage):
     def should_be_product_info(self):
         assert self.is_element_present(*ProductPageLocators.DESCRIPTION), \
             "Not found product info"
+
     # Добавить в корзину
     def add_product_to_cart(self):
         self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET).click()
+
     # Сравнение имени в alert с именем из описания продукта
     def check_added_product_name_with_alert(self):
         name_in_alert = self.browser.find_element(*ProductPageLocators.SUCCESS_MESSAGE).text
         name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
         assert name in name_in_alert, \
             f"Name product added to cart not correct, correct name {name}, name added {name_in_alert}"
+
     # Сравнение цены в описании товара с alert
     def check_price_pr_info_with_alert(self):
         price = self.browser.find_element(*ProductPageLocators.PRICE).text
@@ -36,5 +39,3 @@ class ProductPage(BasePage):
     def go_to_cart_page(self):
         button_basket = self.browser.find_element(*BasePageLocators.BTN_VIEW_BASKET)
         button_basket.click()
-
-
