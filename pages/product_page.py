@@ -4,9 +4,10 @@ from selenium.webdriver.common.by import By
 
 class ProductPage(BasePage):
     # Провека наличия кнопки "Добавить в корзину"
-    def should_be_link_add_to_cart(self):
+    def should_be_cart_link(self):
         assert self.is_element_present(*ProductPageLocators.ADD_TO_BASKET), \
             "Not found button add to cat"
+
     # Проверка наличия информации о товаре
     def should_be_product_info(self):
         assert self.is_element_present(*ProductPageLocators.DESCRIPTION), \
