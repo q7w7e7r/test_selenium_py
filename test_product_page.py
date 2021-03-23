@@ -1,5 +1,6 @@
-import pytest
+import pytest, time
 from .pages.product_page import ProductPage
+from .pages.login_page import LoginPage
 
 
 @pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0",
@@ -16,7 +17,7 @@ def test_guest_can_add_product_to_basket(browser, link):
     assert "promo=offer" in link, f"{link} the link does not contain promo=newYear"
     page = ProductPage(browser,link)
     page.open()
-    page.should_be_link_add_to_cart()
+    page.should_be_cart_link()
     page.should_be_product_info()
     page.add_product_to_cart()
     page.solve_quiz_and_get_code()
@@ -34,3 +35,40 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
     page = ProductPage(browser, link)
     page.open()
     page.go_to_login_page()
+
+class TestUserAddToBasketFromProductPage():
+
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser):
+        link = 'http://selenium1py.pythonanywhere.com/accounts/login/'
+        page = LoginPage(browser, link)
+        page.open()
+        page.register_new_user(str(time.time()) + "@test.com", '123QWEasd123')
+        page.should_be_authorized_user()
+
+    # Открываем страницу товара
+    # Проверяем, что нет сообщения об успехе с помощью is_not_element_present
+    def test_user_cant_see_success_message(self, browser):
+        link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
+        page = ProductPage(browser, link)
+        page.open()
+        page.should_not_be_success_message()
+
+    # Открываем страницу товара
+    # Проверяем, есть ли кнопка "Добавить в корзину"
+    # Проверяем, есть ли основная информация о товаре
+    # Добавляем в корзину
+    # Получаем код
+    # Проверяем название товара
+    # Проверяем цену товара
+    def test_user_can_add_product_to_basket(self, browser):
+        link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
+        # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+        page = ProductPage(browser, link)
+        page.open()
+        page.should_be_cart_link()
+        page.should_be_product_info()
+        page.add_product_to_cart()
+        page.solve_quiz_and_get_code()
+        page.check_added_product_name_with_alert()
+        page.check_price_pr_info_with_alert()
