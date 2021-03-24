@@ -19,7 +19,8 @@ $ pytest -v -s --tb=line --language=en test_main_page.py
 $ pytest -v --tb=line
 
 Execute command examples for Firefox browser:
-
+There are bugs in FireFox, and work is underway to fix them.
 $ pytest -v -s --tb=line --browser_name=firefox --language=en test_product_page.py
 
 $ pytest -v -s --tb=line --browser_name=firefox --language=en test_main_page.py
+
