@@ -1,7 +1,5 @@
 Selenium Test project for http://selenium1py.pythonanywhere.com/
 
-Homework solution for lesson 4 of https://stepik.org/course/575/
-
 $ git clone https://github.com/q7w7e7r/test_selenium_py.git
 
 ---------- folder name MUST BE 'test_selenium_py' ----------
